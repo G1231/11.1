@@ -1,0 +1,104 @@
+/*11.1 (THE TRIANGLE CLASS) Design a class named Triangle that extends ­GeometricObject. The class contains:
+
+Three double data fields named side1, side2, and side3 with default values 1.0 to denote three sides of a triangle.
+
+A no-arg constructor that creates a default triangle.
+
+A constructor that creates a triangle with the specified side1, side2, and side3.
+
+The accessor methods for all three data fields.
+
+A method named getArea() that returns the area of this triangle.
+
+A method named getPerimeter() that returns the perimeter of this triangle.
+
+A method named toString() that returns a string description for the triangle.
+
+Draw the UML diagrams for the classes Triangle and GeometricObject and implement 
+the classes. Write a test program that prompts the user to enter three sides of the 
+triangle, a color, and a Boolean value to indicate whether the triangle is filled. 
+The program should create a Triangle object with these sides and set the color and 
+filled properties using the input. The program should display the area, perimeter, 
+color, and true or false to indicate whether it is filled or not.
+
+*/
+import java.util.Scanner; //importing scanner
+public class Triangle_test {
+  public static void main(String[] args){ //creating main classes and method
+    Scanner input = new Scanner(System.in); //scanner object
+
+    //asking user for sides of triangles
+		System.out.println("Enter the first side of the triangle ");
+		double side1 = input.nextDouble();
+		System.out.println("Enter the second side of the triangle ");
+		double side2 = input.nextDouble();
+    	System.out.println("Enter the third side of the triangle ");
+		double side3 = input.nextDouble();
+	//asking user of triangle color
+		System.out.print("Please input a color ");
+		String triangle_color = input.next();
+	//asking user if whether triangle is filled
+		System.out.print("Is the triangle filled? Please enter True or False ");
+		boolean filled = input.nextBoolean();
+	//creating triangle objects with sides
+		Triangle triangle = new Triangle(side1, side2, side3);
+    //setting color and filled options for object
+		triangle.setColor(triangle_color);
+		triangle.setFilled(filled);
+	//printing everything
+		System.out.println(triangle.toString());
+		System.out.println("Area: " + triangle.getArea() + "\nPerimeter: " + triangle.getPerimeter()+ "\nColor: " + triangle.getColor() + "\nTriangle is" + (triangle.isFilled() ? "" : " not ") 
+			+ "filled");
+	}
+    
+  }
+
+//creating triangle class and inheriting parts from GeometricObject
+ class Triangle extends GeometricObject {
+   //creating placeholder for sides
+	double side1;
+	double side2;
+	double side3;
+
+      //default values when triangle is constructed
+	void stuff() {
+		side1 = 1.0;
+        side2 = 1.0;
+        side3 = 1.0;
+	}
+	 Triangle(double side1, double side2, double side3) { 
+		this.side1 = side1;
+		this.side2 = side2;
+		this.side3 = side3;
+	}
+
+ //Return all 3 sides when using getter method
+	 double get_side1() {
+		return side1;
+	}
+
+	 double get_side2() {
+		return side2;
+	}
+
+	 double get_side3() {
+		return side3;
+	}
+
+	//calculates area and returns it
+	public double getArea() {
+		double avg = (side1 + side2 + side3) / 2;
+		return Math.sqrt(avg * (avg - side1) * (avg - side2) * (avg - side3));
+	}
+
+	//adds all sides to get perimeter
+   public double getPerimeter() {
+		return side1 + side2 + side3;
+	}
+
+
+   public String toString() {
+		return "Triangle: side1 = " + side1 + " side2 = " + side2 +
+			" side3 = " + side3;
+	}
+}
